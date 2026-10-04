@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
 const publicDir = path.join(rootDir, "public");
-const indexPath = path.join(publicDir, "Index.html");
+const indexPath = path.join(publicDir, "index.html");
 
 app.disable("x-powered-by");
 app.use(express.static(publicDir, { index: false }));
