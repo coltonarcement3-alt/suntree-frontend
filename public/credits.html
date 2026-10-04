@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+		/>
+		<title>Credits - Ultraviolet</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 20px;
+				background: #111;
+				color: white;
+			}
+			h1 {
+				text-align: center;
+			}
+			.credit {
+				border-radius: 10px;
+				padding: 10px;
+				display: block;
+				border: #fff 1px solid;
+				color: #fff;
+				display: flex;
+				flex-wrap: wrap;
+				margin-bottom: 15px;
+			}
+			.credit label {
+				margin-left: auto;
+				margin-right: 15px;
+			}
+			.credit a,
+			.credit label {
+				color: white;
+				text-decoration: underline;
+				text-align: right;
+			}
+			.credit pre {
+				display: none;
+				width: 100%;
+			}
+			.credit label::after {
+				content: "show license";
+				cursor: pointer;
+			}
+			.credit input:checked + label::after {
+				content: "hide license";
+			}
+			.credit input:checked ~ pre {
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Credits</h1>
+		<p><a href="/">Return to homepage</a></p>
+	</body>
+</html>
