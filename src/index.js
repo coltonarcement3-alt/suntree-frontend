@@ -6,10 +6,11 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
-const indexPath = path.join(rootDir, "Index.html");
+const publicDir = path.join(rootDir, "public");
+const indexPath = path.join(publicDir, "Index.html");
 
 app.disable("x-powered-by");
-app.use(express.static(rootDir, { index: false }));
+app.use(express.static(publicDir, { index: false }));
 
 app.get("/health", (_req, res) => {
   res.json({ ok: true, service: "suntree-frontend" });
