@@ -23,8 +23,12 @@ form.addEventListener('submit', async (e) => {
       targetUrl = `https://${url}`;
     }
     
-    // Redirect to proxy endpoint
-    window.location.href = `/proxy?url=${encodeURIComponent(targetUrl)}`;
+    // Encode the URL for Ultraviolet proxy
+    // UV uses /uv/service/ prefix
+    const proxyUrl = '/uv/service/' + __uv$config.encodeUrl ? encodeURIComponent(targetUrl) : targetUrl;
+    
+    // Redirect to the proxied URL through Ultraviolet
+    window.location.href = proxyUrl;
   } catch (err) {
     loadingEl.classList.remove('show');
     errorBox.textContent = `Error: ${err.message}`;
