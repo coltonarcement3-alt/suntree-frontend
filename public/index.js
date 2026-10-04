@@ -1,38 +1,44 @@
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker
-    .register("/uv/uv.sw.js", { scope: "/uv/" })
-    .then(() => console.log("UV service worker registered"))
-    .catch((error) => console.error("UV service worker failed to register:", error));
-}
-
+"use strict";
+/**
+ * @type {HTMLFormElement}
+ */
 const form = document.getElementById("uv-form");
-const addressInput = document.getElementById("uv-address");
-const errorBox = document.getElementById("uv-error");
-const loadingEl = document.getElementById("loading");
+/**
+ * @type {HTMLInputElement}
+ */
+const address = document.getElementById("uv-address");
+/**
+ * @type {HTMLInputElement}
+ */
+const searchEngine = document.getElementById("uv-search-engine");
+/**
+ * @type {HTMLParagraphElement}
+ */
+const error = document.getElementById("uv-error");
+/**
+ * @type {HTMLPreElement}
+ */
+const errorCode = document.getElementById("uv-error-code");
+const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
 
-if (form && addressInput) {
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-    const raw = addressInput.value.trim();
-    if (!raw) return;
+  try {
+    await registerSW();
+  } catch (err) {
+    error.textContent = "Failed to register service worker.";
+    errorCode.textContent = err.toString();
+    throw err;
+  }
 
-    errorBox?.classList.remove("show");
-    loadingEl?.classList.add("show");
+  const url = search(address.value, searchEngine.value);
 
-    let target = raw;
-
-    if (!/^https?:\/\//i.test(raw) && !raw.includes(".")) {
-      target = `https://www.google.com/search?q=${encodeURIComponent(raw)}`;
-    } else if (!/^https?:\/\//i.test(raw)) {
-      target = `https://${raw}`;
-    }
-
-    const uvPrefix = "/uv/service/";
-    window.location.href = `${uvPrefix}${encodeURIComponent(target)}`;
-  });
-}
-
-window.addEventListener("load", () => {
-  addressInput?.focus();
+  let frame = document.getElementById("uv-frame");
+  frame.style.display = "block";
+  let wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
+  if ((await connection.getTransport()) !== "/epoxy/index.mjs") {
+    await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
+  }
+  frame.src = __uv$config.prefix + __uv$config.encodeUrl(url);
 });

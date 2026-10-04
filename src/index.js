@@ -26,11 +26,11 @@ app.get("/health", (_req, res) => {
 });
 
 app.get("/", (_req, res) => {
-  res.sendFile(path.join(publicDir, "index.html"));
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(publicDir, "404.html"));
+  res.status(404).sendFile(path.join(publicPath, "404.html"));
 });
 
 const server = createServer((req, res) => {

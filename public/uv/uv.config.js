@@ -1,14 +1,12 @@
-/*
-Ultraviolet (UV) Configuration
-Docs: https://github.com/titaniumnetwork-dev/ultraviolet/tree/main/docs
-*/
+// This file overwrites the stock UV config.js
 
 self.__uv$config = {
-	prefix: '/uv/service/',
-	encodeUrl: true,
-	bareServers: ['http://localhost:8080/', 'https://localhost:8080/'],
-	bypassHeaders: ['user-agent'],
-	wispUrl: 'ws://localhost:8080/wisp/',
-	secure: false,
-	logLevel: 'debug',
+  prefix: "/uv/service/",
+  encodeUrl: Ultraviolet.codec.xor.encode,
+  decodeUrl: Ultraviolet.codec.xor.decode,
+  handler: "/uv/uv.handler.js",
+  client: "/uv/uv.client.js",
+  bundle: "/uv/uv.bundle.js",
+  config: "/uv/uv.config.js",
+  sw: "/uv/uv.sw.js",
 };

@@ -1,76 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Suntree - A sophisticated web proxy powered by Ultraviolet">
-  <meta name="theme-color" content="#6366f1">
-  <title>Suntree | Ultraviolet Web Proxy</title>
-  <link rel="stylesheet" href="index.css">
-</head>
-<body>
-  <header>
-    <div class="container">
-      <div class="logo-icon">🌐</div>
-      <h1>Suntree</h1>
-      <p>A sophisticated proxy powered by Ultraviolet</p>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Ultraviolet | Sophisticated Web Proxy</title>
+    <meta
+      name="description"
+      content="Ultraviolet is a highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers. Unblock sites today!"
+    />
+    <meta
+      name="keywords"
+      content="proxy, web proxy, ultraviolet, service workers, unblock websites, unblock chromebook, free web proxy, proxy list, proxy sites, un block chromebook, online proxy, proxy server, proxy site, online proxy, proxy websites, proxy server, web proxy"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#434c5e"
+    />
+    <meta name="googlebot" content="index, follow, snippet" />
+    <link rel="shortcut icon" content="favicon.ico" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="baremux/index.js" defer></script>
+    <script src="epoxy/index.js" defer></script>
+    <script src="uv/uv.bundle.js" defer></script>
+    <script src="uv/uv.config.js" defer></script>
+    <script src="register-sw.js" defer></script>
+    <script src="search.js" defer></script>
+    <script src="index.js" defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Ultraviolet (Web Proxy)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers and more!"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I unblock sites using Ultraviolet?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Simply head to an official site featuring Ultraviolet such as Holy Unblocker or Incognito! You can also self-host Ultraviolet on your own web server for maximum privacy."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if Ultraviolet is blocked or not working?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Join the Titanium Network Discord at discord.gg/unblock!"
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <div title="Ultraviolet Logo" class="flex-center logo-wrapper header-center">
+      <img class="logo" src="uv.png" alt="Ultraviolet" />
+      <h1>Ultraviolet | TN</h1>
     </div>
-  </header>
-
-  <main>
-    <div class="container">
-      <div class="search-section">
-        <h2>Browse the web freely</h2>
-        <p style="color: var(--text-muted); margin-top: 10px;">Access any website through our secure proxy network</p>
-        
-        <form id="uv-form" class="search-form">
-          <input
-            id="uv-address"
-            class="search-input"
-            type="text"
-            placeholder="Enter a website or search query..."
-            autocomplete="off"
-          />
-          <button type="submit" class="btn btn-primary">
-            <span>→</span> Browse
-          </button>
-        </form>
-
-        <div id="uv-error" class="error-box"></div>
-        <div id="loading" class="loading">
-          <div class="spinner"></div>
-          <span>Connecting...</span>
-        </div>
-      </div>
-
-      <div class="features">
-        <div class="feature-card">
-          <h3>🔒 Secure</h3>
-          <p>Your browsing is encrypted and anonymous through our proxy network</p>
-        </div>
-        <div class="feature-card">
-          <h3>⚡ Fast</h3>
-          <p>Optimized performance with minimal latency for smooth browsing</p>
-        </div>
-        <div class="feature-card">
-          <h3>🌍 Unrestricted</h3>
-          <p>Access websites freely regardless of geographic or network restrictions</p>
-        </div>
-      </div>
+    <div class="flex-center desc left-margin">
+      <p>
+        Ultraviolet is highly sophisticated proxy used for evading internet
+        censorship.
+      </p>
     </div>
-  </main>
 
-  <footer>
-    <div class="container">
+    <form id="uv-form" class="flex-center">
+      <input
+        id="uv-search-engine"
+        value="https://www.google.com/search?q=%s"
+        type="hidden"
+      />
+      <input id="uv-address" type="text" placeholder="Search the web freely" />
+    </form>
+    <div class="desc left-margin">
+      <p id="uv-error"></p>
+      <pre id="uv-error-code"></pre>
+    </div>
+    <footer>
       <div>
-        <a href="https://github.com/titaniumnetwork-dev/Ultraviolet" target="_blank">Ultraviolet</a>
-        <a href="https://github.com/coltonarcement3-alt/suntree-frontend" target="_blank">Suntree</a>
-        <a href="https://discord.gg/unblock" target="_blank">Discord</a>
+        <a
+          title="The TitaniumNetwork GitHub organization"
+          href="https://github.com/titaniumnetwork-dev"
+          >TitaniumNetwork</a
+        >
+        <a title="The TitaniumNetwork Discord" href="https://discord.gg/unblock"
+          >Discord</a
+        >
+        <a
+          title="The TompHTTP GitHub organization"
+          href="https://github.com/tomphttp"
+          >TompHTTP</a
+        >
+        <a
+          title="The official deployment repository for Ultraviolet"
+          href="https://github.com/titaniumnetwork-dev/Ultraviolet-App"
+          >GitHub</a
+        >
+        <a title="License information" href="credits.html">Credits</a>
       </div>
-      <p>&copy; 2026 Suntree. Powered by Ultraviolet and TitaniumNetwork.</p>
-    </div>
-  </footer>
-
-  <script src="index.js"></script>
-</body>
+      <div>
+        <span>Ultraviolet &copy; TN 2023</span>
+      </div>
+    </footer>
+    <iframe style="display: none;" id="uv-frame"></iframe>
+  </body>
 </html>
