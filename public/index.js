@@ -1,50 +1,39 @@
-"use strict";
-/**
- * @type {HTMLFormElement}
- */
-const form = document.getElementById("uv-form");
-/**
- * @type {HTMLInputElement}
- */
-const address = document.getElementById("uv-address");
-/**
- * @type {HTMLInputElement}
- */
-const searchEngine = document.getElementById("uv-search-engine");
-/**
- * @type {HTMLParagraphElement}
- */
-const error = document.getElementById("uv-error");
-/**
- * @type {HTMLPreElement}
- */
-const errorCode = document.getElementById("uv-error-code");
-const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
+const form = document.getElementById('uv-form');
+const addressInput = document.getElementById('uv-address');
+const errorBox = document.getElementById('uv-error');
+const loadingEl = document.getElementById('loading');
 
-form.addEventListener("submit", async (event) => {
-	event.preventDefault();
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const url = addressInput.value.trim();
+  if (!url) return;
+  
+  // Clear previous errors
+  errorBox.classList.remove('show');
+  loadingEl.classList.add('show');
+  
+  try {
+    // Determine if it's a search query or URL
+    let targetUrl = url;
+    if (!url.includes('.') || (!url.startsWith('http://') && !url.startsWith('https://'))) {
+      // It's a search query
+      targetUrl = `https://www.google.com/search?q=${encodeURIComponent(url)}`;
+    } else if (!url.startsWith('http')) {
+      targetUrl = `https://${url}`;
+    }
+    
+    // Redirect to proxy endpoint
+    window.location.href = `/proxy?url=${encodeURIComponent(targetUrl)}`;
+  } catch (err) {
+    loadingEl.classList.remove('show');
+    errorBox.textContent = `Error: ${err.message}`;
+    errorBox.classList.add('show');
+    console.error('Proxy error:', err);
+  }
+});
 
-	try {
-		await registerSW();
-	} catch (err) {
-		error.textContent = "Failed to register service worker.";
-		errorCode.textContent = err.toString();
-		throw err;
-	}
-
-	const url = search(address.value, searchEngine.value);
-
-	let frame = document.getElementById("uv-frame");
-	frame.style.display = "block";
-	let wispUrl =
-		(location.protocol === "https:" ? "wss" : "ws") +
-		"://" +
-		location.host +
-		"/wisp/";
-	if ((await connection.getTransport()) !== "/epoxy/index.mjs") {
-		await connection.setTransport("/epoxy/index.mjs", [
-			{ wisp: wispUrl },
-		]);
-	}
-	frame.src = __uv$config.prefix + __uv$config.encodeUrl(url);
+// Focus on input when page loads
+window.addEventListener('load', () => {
+  addressInput.focus();
 });
