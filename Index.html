@@ -1,46 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suntree Network Clone</title>
-    <style>
-        body { font-family: sans-serif; background: #0b0f19; color: white; text-align: center; padding: 50px; }
-        .search-container { margin: 40px auto; max-width: 600px; background: #1e293b; padding: 30px; border-radius: 12px; }
-        input { width: 70%; padding: 12px; border-radius: 6px; border: none; font-size: 16px; }
-        button { padding: 12px 24px; background: #10b981; border: none; color: white; border-radius: 6px; font-weight: bold; cursor: pointer; }
-        .grid { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
-        .card { background: #1e293b; padding: 20px; border-radius: 8px; width: 120px; cursor: pointer; }
-    </style>
+    <meta http-equiv="refresh" content="0; url=/public/index.html">
 </head>
 <body>
-    <h1>🌲 SUNTREE NETWORK</h1>
-    <p>Fast, global unblocked web gateway</p>
-
-    <div class="search-container">
-        <input type="text" id="urlInput" placeholder="Enter website URL (e.g. google.com)">
-        <button onclick="launchProxy()">Go</button>
-    </div>
-
-    <h3>Popular Games</h3>
-    <div class="grid">
-        <div class="card" onclick="launchGame('https://retrobowl.me')">Retro Bowl</div>
-        <div class="card" onclick="launchGame('https://1v1.lol')">1v1.lol</div>
-    </div>
-
-    <script>
-        // CHANGE THIS URL TO YOUR RENDER BACKEND ONCE BUILT IN STEP 3:
-        const BACKEND_PROXY = window.location.origin;
-
-        function launchProxy() {
-            let targetUrl = document.getElementById('urlInput').value;
-            if(!targetUrl.startsWith('http')) targetUrl = 'https://' + targetUrl;
-            window.location.href = `${BACKEND_PROXY}/?url=${encodeURIComponent(targetUrl)}`;
-        }
-
-        function launchGame(gameUrl) {
-            window.location.href = `${BACKEND_PROXY}/?url=${encodeURIComponent(gameUrl)}`;
-        }
-    </script>
+    <p>Loading Suntree Gateway...</p>
 </body>
 </html>
